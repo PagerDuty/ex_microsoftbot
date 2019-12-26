@@ -24,7 +24,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
   @doc """
   This method allows you to send an activity to a conversation regardless of previous posts to a conversation. [API Reference](https://docs.botframework.com/en-us/restapi/connector/#!/Conversations/Conversations_SendToConversation)
   """
-  @spec send_to_conversation(String.t, Models.Activity.t) :: :ok | Client.error_type
+  @spec send_to_conversation(String.t, Models.Activity.t) :: {:ok, Models.ResourceResponse.t} | Client.error_type
   def send_to_conversation(conversation_id, %Models.Activity{serviceUrl: service_url} = activity), do: send_to_conversation(service_url, conversation_id, activity)
 
   @doc """
@@ -75,7 +75,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
   @doc """
   This method allows you to upload an attachment directly into a channels blob storage. [API Reference](https://docs.botframework.com/en-us/restapi/connector/#!/Conversations/Conversations_UploadAttachment)
   """
-  @spec upload_attachment(String.t, String.t, Models.AttachmentData.t) :: :ok | Client.error_type
+  @spec upload_attachment(String.t, String.t, Models.AttachmentData.t) :: {:ok, Models.ResourceResponse.t} | Client.error_type
   def upload_attachment(service_url, conversation_id, %Models.AttachmentData{} = attachment) do
     api_endpoint = "#{conversations_endpoint(service_url)}/#{conversation_id}/attachments"
 
