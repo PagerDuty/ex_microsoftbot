@@ -35,8 +35,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
     api_endpoint = "#{conversations_endpoint(service_url)}/#{conversation_id}/activities"
 
     HTTPotion.post(api_endpoint, [body: Poison.encode!(activity), headers: headers(TokenManager.get_token, api_endpoint)])
-    |> deserialize_response(&(&1))
-    |> change_deserialized_response_to_ok
+    |> deserialize_response(&Models.ResourceResponse.parse/1)
   end
 
 
