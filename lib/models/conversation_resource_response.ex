@@ -22,7 +22,7 @@ defmodule ExMicrosoftBot.Models.ConversationResourceResponse do
   @doc """
   Decode a string into `ExMicrosoftBot.Models.ConversationResourceResponse`
   """
-  @spec parse(String.t) :: ExMicrosoftBot.Models.ResourceResponse.t
+  @spec parse(String.t) :: ExMicrosoftBot.Models.ConversationResourceResponse.t
   def parse(param) when is_binary(param) do
     Poison.decode!(param, as: decoding_map())
   end
