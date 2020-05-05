@@ -29,6 +29,6 @@ defmodule ExMicrosoftBot.Models.ConversationResourceResponse do
 
   @doc false
   def decoding_map() do
-    %ExMicrosoftBot.Models.ResourceResponse{}
+    %ExMicrosoftBot.Models.ConversationResourceResponse{}
   end
 end
