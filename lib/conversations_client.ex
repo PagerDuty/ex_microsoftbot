@@ -17,7 +17,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
     endpoint = conversations_endpoint(service_url)
 
     HTTPotion.post(endpoint, [body: Poison.encode!(params), headers: headers(TokenManager.get_token, endpoint)])
-    |> deserialize_response(&Models.ResourceResponse.parse/1)
+    |> deserialize_response(&Models.ConversationResourceResponse.parse/1)
   end
 
 
