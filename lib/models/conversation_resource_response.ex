@@ -4,7 +4,7 @@ defmodule ExMicrosoftBot.Models.ConversationResourceResponse do
   """
 
   @derive [Poison.Encoder]
-  defstruct [:id, :activityId]
+  defstruct [:id, :activityId, :serviceUrl]
 
   @type t :: %ExMicrosoftBot.Models.ConversationResourceResponse{
     id: String.t,
