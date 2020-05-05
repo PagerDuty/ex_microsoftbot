@@ -14,7 +14,7 @@ defmodule ExMicrosoftBot.Models.ConversationResourceResponse do
   @doc """
   Decode a map into `ExMicrosoftBot.Models.ConversationResourceResponse`
   """
-  @spec parse(map) :: {:ok, ExMicrosoftBot.Models.ResourceResponse.t}
+  @spec parse(map) :: {:ok, ExMicrosoftBot.Models.ConversationResourceResponse.t}
   def parse(param) when is_map(param) do
     {:ok, Poison.Decode.decode(param, as: decoding_map())}
   end
