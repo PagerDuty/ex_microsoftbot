@@ -8,7 +8,8 @@ defmodule ExMicrosoftBot.Models.ConversationResourceResponse do
 
   @type t :: %ExMicrosoftBot.Models.ResourceResponse{
     id: String.t,
-    activityId: String.t
+    activityId: String.t,
+    serviceUrl: String.t
   }
 
   @doc """
