@@ -12,7 +12,7 @@ defmodule ExMicrosoftBot.Models.ConversationResourceResponse do
   }
 
   @doc """
-  Decode a map into `ExMicrosoftBot.Models.ResourceResponse`
+  Decode a map into `ExMicrosoftBot.Models.ConversationResourceResponse`
   """
   @spec parse(map) :: {:ok, ExMicrosoftBot.Models.ResourceResponse.t}
   def parse(param) when is_map(param) do
