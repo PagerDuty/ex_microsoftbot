@@ -4,11 +4,12 @@ defmodule ExMicrosoftBot.Models.ChannelAccount do
   """
 
   @derive [Poison.Encoder]
-  defstruct [:id, :name, :objectId, :givenName, :surname, :email, :userPrincipalName, :tenantId]
+  defstruct [:id, :name, :aadObjectId, :objectId, :givenName, :surname, :email, :userPrincipalName, :tenantId]
 
   @type t :: %ExMicrosoftBot.Models.ChannelAccount{
           id: String.t(),
           name: String.t(),
+               aadObjectId: String.t,
           objectId: String.t(),
           givenName: String.t(),
           surname: String.t(),
