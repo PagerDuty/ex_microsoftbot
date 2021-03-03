@@ -81,7 +81,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
 
     HTTPotion.put(api_endpoint, authed_req_options(api_endpoint, body: Poison.encode!(activity)))
     |> deserialize_response(&(&1))
-    |> change_deserialized_response_to_ok
+    |> deserialize_response(&Models.ResourceResponse.parse/1)
   end
 
   @doc """
