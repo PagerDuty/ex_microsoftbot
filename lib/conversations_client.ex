@@ -141,13 +141,13 @@ defmodule ExMicrosoftBot.Client.Conversations do
   """
 #  @spec update_activity(String.t(), String.t(), Models.Activity.t()) ::
 #          {:ok, Models.ResourceResponse.t()} | Client.error_type()
-  def update_activity(service_url, conversation_id, %Models.Activity{id: activity_id} = activity) do
-    api_endpoint =
-      "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
-
-    api_endpoint
-    |> HTTPotion.put(authed_req_options(api_endpoint, body: Poison.encode!(activity)))
-    |> deserialize_response(&Models.ResourceResponse.parse/1)
+#  def update_activity(service_url, conversation_id, %Models.Activity{id: activity_id} = activity) do
+#    api_endpoint =
+#      "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
+#
+#    api_endpoint
+#    |> HTTPotion.put(authed_req_options(api_endpoint, body: Poison.encode!(activity)))
+#    |> deserialize_response(&Models.ResourceResponse.parse/1)
 #  end
 
   @doc """
