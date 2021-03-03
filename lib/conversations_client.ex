@@ -77,11 +77,12 @@ defmodule ExMicrosoftBot.Client.Conversations do
   """
   @spec update_activity(String.t, String.t, String.t, Models.Activity.t) :: :ok | Client.error_type
   def update_activity(service_url, conversation_id, activity_id, %Models.Activity{} = activity) do
-    api_endpoint = "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
+    api_endpoint =
+        "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
 
-    HTTPotion.put(api_endpoint, authed_req_options(api_endpoint, body: Poison.encode!(activity)))
-    |> deserialize_response(&(&1))
-    |> deserialize_response(&Models.ResourceResponse.parse/1)
+    api_endpoint
+      |> HTTPotion.put(authed_req_options(api_endpoint, body: Poison.encode!(activity)))
+      |> deserialize_response(&Models.ResourceResponse.parse/1)
   end
 
   @doc """
@@ -138,8 +139,8 @@ defmodule ExMicrosoftBot.Client.Conversations do
   @doc """
   Updates an existing activity. The activity struct is expected to have an ID. [API Reference](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#update-activity)
   """
-  @spec update_activity(String.t(), String.t(), Models.Activity.t()) ::
-          {:ok, Models.ResourceResponse.t()} | Client.error_type()
+#  @spec update_activity(String.t(), String.t(), Models.Activity.t()) ::
+#          {:ok, Models.ResourceResponse.t()} | Client.error_type()
   def update_activity(service_url, conversation_id, %Models.Activity{id: activity_id} = activity) do
     api_endpoint =
       "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
@@ -147,7 +148,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
     api_endpoint
     |> HTTPotion.put(authed_req_options(api_endpoint, body: Poison.encode!(activity)))
     |> deserialize_response(&Models.ResourceResponse.parse/1)
-  end
+#  end
 
   @doc """
   Deletes an existing activity. The returned content will always be empty.
