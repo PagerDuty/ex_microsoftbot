@@ -3,7 +3,7 @@ defmodule ExMicrosoftBot.Client.MsTeams do
   This module provides the Microsoft Teams specific functions
   """
 
-  import ExMicrosoftBot.Client, only: [authed_req_options: 2, deserialize_response: 2]
+  import ExMicrosoftBot.Client, only: [authed_req_options: 1, deserialize_response: 2]
   alias ExMicrosoftBot.{Models, TokenManager}
 
   def conversations_list(service_url, team_id) do
