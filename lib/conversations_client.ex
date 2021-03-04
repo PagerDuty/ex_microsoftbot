@@ -67,25 +67,6 @@ defmodule ExMicrosoftBot.Client.Conversations do
   end
 
   @doc """
-  This method allows you to update an activity. [API Reference](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#update-activity)
-  """
-  @spec update_activity(String.t, String.t, Models.Activity.t) :: :ok | Client.error_type
-  def update_activity(conversation_id, activity_id, %Models.Activity{serviceUrl: service_url} = activity), do: update_activity(service_url, conversation_id, activity_id, activity)
-
-  @doc """
-  This method allows you to update an activity. [API Reference](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#update-activity)
-  """
-  @spec update_activity(String.t, String.t, String.t, Models.Activity.t) :: :ok | Client.error_type
-  def update_activity(service_url, conversation_id, activity_id, %Models.Activity{} = activity) do
-    api_endpoint =
-        "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
-
-    api_endpoint
-      |> HTTPotion.put(authed_req_options(api_endpoint, body: Poison.encode!(activity)))
-      |> deserialize_response(&Models.ResourceResponse.parse/1)
-  end
-
-  @doc """
   This function takes a ConversationId and returns an array of ChannelAccount[] objects which are the members of the conversation. [API Reference](https://docs.botframework.com/en-us/restapi/connector/#!/Conversations/Conversations_GetConversationMembers).
   When ActivityId is passed in then it returns the members of the particular activity in the conversation. [API Reference](https://docs.botframework.com/en-us/restapi/connector/#!/Conversations/Conversations_GetActivityMembers)
   """
@@ -139,16 +120,23 @@ defmodule ExMicrosoftBot.Client.Conversations do
   @doc """
   Updates an existing activity. The activity struct is expected to have an ID. [API Reference](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#update-activity)
   """
-#  @spec update_activity(String.t(), String.t(), Models.Activity.t()) ::
-#          {:ok, Models.ResourceResponse.t()} | Client.error_type()
-#  def update_activity(service_url, conversation_id, %Models.Activity{id: activity_id} = activity) do
-#    api_endpoint =
-#      "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
-#
-#    api_endpoint
-#    |> HTTPotion.put(authed_req_options(api_endpoint, body: Poison.encode!(activity)))
-#    |> deserialize_response(&Models.ResourceResponse.parse/1)
-#  end
+  @spec update_activity(String.t(), String.t(), Models.Activity.t()) ::
+          {:ok, Models.ResourceResponse.t()} | Client.error_type()
+  def update_activity(service_url, conversation_id, %Models.Activity{id: activity_id} = activity) do
+    api_endpoint =
+      "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
+
+    api_endpoint
+    |> HTTPotion.put(authed_req_options(api_endpoint, body: Poison.encode!(activity)))
+    |> deserialize_response(&Models.ResourceResponse.parse/1)
+  end
+
+  @doc """
+  This method allows you to update an activity. [API Reference](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#update-activity)
+  """
+  @spec update_activity(String.t, String.t, Models.Activity.t) :: :ok | Client.error_type
+  def update_activity(conversation_id, activity_id, %Models.Activity{serviceUrl: service_url} = activity), do:
+    update_activity(service_url, conversation_id, Map.put(activity, :id, activity_id))
 
   @doc """
   Deletes an existing activity. The returned content will always be empty.
