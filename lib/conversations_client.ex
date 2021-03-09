@@ -122,7 +122,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
   """
   @spec update_activity(String.t, String.t, Models.Activity.t) ::
           {:ok, Models.ResourceResponse.t()} | Client.error_type()
-  def update_activity(conversation_id, activity_id, %Models.Activity{id: activity_id, serviceUrl: service_url} = activity) when is_nil(activity_id), do:
+  def update_activity(conversation_id, activity_id, %Models.Activity{id: id, serviceUrl: service_url} = activity) when is_nil(id), do:
     update_activity(service_url, conversation_id, Map.put(activity |> IO.inspect(), :id, activity_id))
 
   @doc """
