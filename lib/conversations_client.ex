@@ -120,7 +120,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
   @doc """
   This method allows you to update an activity. [API Reference](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#update-activity)
   """
-  @spec update_activity(String.t, String.t, Models.Activity.t) ::
+  @spec update_activity(String.t(), String.t(), Models.Activity.t()) ::
           {:ok, Models.ResourceResponse.t()} | Client.error_type()
   def update_activity(conversation_id, activity_id, %Models.Activity{id: id, serviceUrl: service_url} = activity) when is_nil(id), do:
     update_activity(service_url, conversation_id, Map.put(activity, :id, activity_id))
