@@ -123,7 +123,7 @@ defmodule ExMicrosoftBot.Client.Conversations do
   @spec update_activity(String.t, String.t, Models.Activity.t) ::
           {:ok, Models.ResourceResponse.t()} | Client.error_type()
   def update_activity(conversation_id, activity_id, %Models.Activity{id: id, serviceUrl: service_url} = activity) when is_nil(id), do:
-    update_activity(service_url, conversation_id, Map.put(activity |> IO.inspect(), :id, activity_id))
+    update_activity(service_url, conversation_id, Map.put(activity, :id, activity_id))
 
   @doc """
   Updates an existing activity. The activity struct is expected to have an ID. [API Reference](https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#update-activity)
@@ -131,8 +131,6 @@ defmodule ExMicrosoftBot.Client.Conversations do
   @spec update_activity(String.t(), String.t(), Models.Activity.t()) ::
           {:ok, Models.ResourceResponse.t()} | Client.error_type()
   def update_activity(service_url, conversation_id, %Models.Activity{id: activity_id} = activity) do
-    IO.inspect("update_activity 2")
-    IO.inspect(activity)
     api_endpoint =
       "#{conversations_endpoint(service_url)}/#{conversation_id}/activities/#{activity_id}"
 
