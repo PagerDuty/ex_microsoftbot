@@ -1,35 +1,29 @@
 defmodule ExMicrosoftBot.Models.ConversationResourceResponse do
   @moduledoc """
-  Microsoft bot conversation API resource response
+  Microsoft bot conversation API response when creating a conversation.
+  https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#conversationresourceresponse-object
   """
 
   @derive [Poison.Encoder]
   defstruct [:id, :activityId, :serviceUrl]
 
-  @type t :: %ExMicrosoftBot.Models.ConversationResourceResponse{
-    id: String.t,
-    activityId: String.t,
-    serviceUrl: String.t
-  }
+  @type t :: %__MODULE__{
+          id: String.t(),
+          activityId: String.t() | nil,
+          serviceUrl: String.t()
+        }
 
-  @doc """
-  Decode a map into `ExMicrosoftBot.Models.ConversationResourceResponse`
-  """
-  @spec parse(map) :: {:ok, ExMicrosoftBot.Models.ConversationResourceResponse.t}
+  @spec parse(String.t() | Map.t()) :: __MODULE__.t() | {:ok, __MODULE__.t()}
   def parse(param) when is_map(param) do
-    {:ok, Poison.Decode.decode(param, as: decoding_map())}
+    {:ok, Poison.Decode.transform(param, %{as: decoding_map()})}
   end
 
-  @doc """
-  Decode a string into `ExMicrosoftBot.Models.ConversationResourceResponse`
-  """
-  @spec parse(String.t) :: ExMicrosoftBot.Models.ConversationResourceResponse.t
-  def parse(param) when is_binary(param) do
+  def parse(param) do
     Poison.decode!(param, as: decoding_map())
   end
 
   @doc false
   def decoding_map() do
-    %ExMicrosoftBot.Models.ConversationResourceResponse{}
+    %__MODULE__{}
   end
 end

@@ -5,16 +5,28 @@ defmodule ExMicrosoftBot.Models.ChannelAcountTest do
 
   describe ".parse/1" do
     test "parses a map into the right struct" do
-      {:ok, %ChannelAccount{id: id, name: name, aadObjectId: aad_object_id}} =
+      {:ok, %ChannelAccount{} = channel_account} =
         ChannelAccount.parse(%{
           "id" => "123456789",
           "name" => "Some Name",
-          "aadObjectId" => "00000000-0000-0000-0000-000000000000"
+          "aadObjectId" => "00000000-0000-0000-0000-000000000000",
+          "objectId" => "a53d7526-d0e9-436f-9443-ddb317ef3608",
+          "givenName" => "Some",
+          "surname" => "Name",
+          "email" => "some.name@gmail.com",
+          "userPrincipalName" => "some.name@some-app.onmicrosoft.com",
+          "tenantId" => "a53d7526-d0e9-436f-9443-ddb317ef3608"
         })
 
-      assert id == "123456789"
-      assert name == "Some Name"
+      assert channel_account.id == "123456789"
+      assert channel_account.name == "Some Name"
       assert aad_object_id == "00000000-0000-0000-0000-000000000000"
+      assert channel_account.objectId == "a53d7526-d0e9-436f-9443-ddb317ef3608"
+      assert channel_account.givenName == "Some"
+      assert channel_account.surname == "Name"
+      assert channel_account.email == "some.name@gmail.com"
+      assert channel_account.userPrincipalName == "some.name@some-app.onmicrosoft.com"
+      assert channel_account.tenantId == "a53d7526-d0e9-436f-9443-ddb317ef3608"
     end
 
     test "parses a list into an array of the right struct" do
